@@ -12,8 +12,7 @@ import javax.persistence.Id;
 
 @Entity
 @Builder @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor
 public class Account {
 
     @Id

@@ -1,8 +1,9 @@
-package com.dcinside.gallery.security;
+package com.dcinside.gallery.service.Impl;
 
 import com.dcinside.gallery.domain.Account;
 import com.dcinside.gallery.domain.dto.AccountDto;
 import com.dcinside.gallery.repository.AccountRepository;
+import com.dcinside.gallery.security.PrincipalDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

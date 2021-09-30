@@ -18,7 +18,8 @@ public class MinorGalleryServiceImpl implements MinorGalleryService {
     public void createGallery(MinorGalleryDto minorGalleryDto, Account account) {
         MinorGallery gallery = MinorGallery.builder()
                 .name(minorGalleryDto.getName())
-                .manager(account.getUsername())
+                .minorId(minorGalleryDto.getMinorId())
+                // .manager(account.getUsername())
                 .totalPost(0)
                 .build();
         minorGalleryRepository.save(gallery);

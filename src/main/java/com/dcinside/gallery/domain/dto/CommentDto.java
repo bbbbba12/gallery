@@ -1,13 +1,13 @@
 package com.dcinside.gallery.domain.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor @AllArgsConstructor
-public class MinorGalleryDto {
-    private String name;
-    private String minorId;
+public class CommentDto {
+    private String author;
+    private String password;
+    private String content;
 }

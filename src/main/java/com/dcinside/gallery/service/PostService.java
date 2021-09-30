@@ -13,6 +13,7 @@ public interface PostService {
      * 2. 일반글 조회
      * 3. 개념글 조회
      * 4. 수정 and 삭제
+     * ++ 게시, 수정, 삭제는 임시 아이디, 비번이 필요하다.
      */
     void write(String minorId, PostDto postDto);
 
@@ -22,7 +23,7 @@ public interface PostService {
 
     Page<Post> findRecommendPost(String minorId, Pageable pageable);
 
-    void update(String minorId, Long postNumber, PostDto postDto);
+    void modify(String minorId, Long postNumber, PostDto postDto);
 
     void delete(String minorId, Long postNumber);
 }

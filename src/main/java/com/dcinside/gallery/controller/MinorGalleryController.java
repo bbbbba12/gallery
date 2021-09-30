@@ -1,5 +1,6 @@
 package com.dcinside.gallery.controller;
 
+import com.dcinside.gallery.domain.Account;
 import com.dcinside.gallery.domain.dto.MinorGalleryDto;
 import com.dcinside.gallery.security.PrincipalDetails;
 import com.dcinside.gallery.service.MinorGalleryService;
@@ -16,7 +17,9 @@ public class MinorGalleryController {
     private final MinorGalleryService minorGalleryService;
 
     @PostMapping("/minorGallery/create")
-    public void createGallery(@RequestBody MinorGalleryDto minorGalleryDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        minorGalleryService.createGallery(minorGalleryDto, principalDetails.getAccount());
+    public String createGallery(@RequestBody MinorGalleryDto minorGalleryDto, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        Account build = Account.builder().build();
+        minorGalleryService.createGallery(minorGalleryDto, build);
+        return "create!";
     }
 }

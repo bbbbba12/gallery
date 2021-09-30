@@ -7,6 +7,7 @@ import com.dcinside.gallery.repository.MinorGalleryRepository;
 import com.dcinside.gallery.repository.PostRepository;
 import com.dcinside.gallery.service.PostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,12 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public void write(String minorId, PostDto postDto) {
         MinorGallery minorGallery = minorGalleryRepository.findByMinorId(minorId);
-
+        System.out.println(minorGallery.getMinorId());
         Post post = Post.builder()
                 .name(postDto.getName())
                 .content(postDto.getContent())
+                .author(postDto.getAuthor())
+                .password(postDto.getPassword())
                 .postType(postDto.getPostType())
                 .build();
 
@@ -41,8 +44,8 @@ public class PostServiceImpl implements PostService {
      */
     @Override
     @Transactional
-    public void update(String minorId, Long postNumber, PostDto postDto) {
-        Post post = postRepository.findByMinorGalleryIdAndPostNumber(minorId, postNumber);
+    public void modify(String minorId, Long postNumber, PostDto postDto) {
+        Post post = postRepository.findByMinorIdAndPostNumber(minorId, postNumber);
         post.update(postDto);
     }
     /**
@@ -51,17 +54,17 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public void delete(String minorId, Long postNumber) {
-        postRepository.deleteByMinorGalleryIdAndPostNumber(minorId, postNumber);
+        postRepository.deleteByMinorIdAndPostNumber(minorId, postNumber);
     }
 
     @Override
     public Page<Post> findNormalPost(String minorId, Pageable pageable) {
-        return postRepository.findByMinorGalleryId(minorId, pageable);
+        return postRepository.findByMinorId(minorId, pageable);
     }
 
     @Override
     public Post viewPost(String minorId, Long postNumber) {
-        return postRepository.findByMinorGalleryIdAndPostNumber(minorId, postNumber);
+        return postRepository.findByMinorIdAndPostNumber(minorId, postNumber);
     }
 
     @Override
