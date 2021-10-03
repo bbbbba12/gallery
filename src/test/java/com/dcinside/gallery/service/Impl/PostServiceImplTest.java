@@ -18,7 +18,6 @@ import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
 class PostServiceImplTest {
 
     @Autowired
@@ -31,17 +30,5 @@ class PostServiceImplTest {
 
     @Autowired
     EntityManager em;
-
-    @Test
-    @Transactional
-    void postServiceTest() {
-        MinorGalleryDto dto = new MinorGalleryDto("test", "test");
-        Account account = Account.builder().build();
-        minorGalleryService.createGallery(dto, account);
-
-        PostDto postDto = new PostDto("name", "content", "author", "password", "type");
-
-        postService.write("test", postDto);
-    }
 
 }

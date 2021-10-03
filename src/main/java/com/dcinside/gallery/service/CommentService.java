@@ -3,6 +3,8 @@ package com.dcinside.gallery.service;
 import com.dcinside.gallery.domain.Comment;
 import com.dcinside.gallery.domain.dto.CommentDto;
 
+import java.util.List;
+
 public interface CommentService {
     /**
      * 1. 댓글 생성
@@ -15,7 +17,6 @@ public interface CommentService {
      */
     void comment(String minorId, Long postNumber, CommentDto commentDto);
     void update(Long commentId, CommentDto commentDto);
-    void delete(Long commentId);
+    void delete(Long commentId, String password);
     void nestedComment(Long commentId, CommentDto commentDto);
-    Comment viewComment(String minorId, Long postNumber);
 }

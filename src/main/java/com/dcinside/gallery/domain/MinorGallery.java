@@ -15,10 +15,13 @@ public class MinorGallery {
     private String minorId;
     private String name;
     private String manager;
-//    private String postType;
+    private String postType;
     private int totalPost;
-
 
     @OneToMany(mappedBy = "minorGallery", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "ACCOUNT_ID")
+    private Account account;
 }

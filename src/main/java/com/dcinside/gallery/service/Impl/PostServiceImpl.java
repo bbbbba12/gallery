@@ -29,11 +29,11 @@ public class PostServiceImpl implements PostService {
         Post post = Post.builder()
                 .name(postDto.getName())
                 .content(postDto.getContent())
-                .author(postDto.getAuthor())
+                // .author(postDto.getAuthor())
                 .password(postDto.getPassword())
                 .postType(postDto.getPostType())
                 .build();
-
+        
         post.addMinorGallery(minorGallery);
     }
 

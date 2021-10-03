@@ -20,8 +20,14 @@ public class MinorGalleryServiceImpl implements MinorGalleryService {
                 .name(minorGalleryDto.getName())
                 .minorId(minorGalleryDto.getMinorId())
                 // .manager(account.getUsername())
+                .postType("일반")
                 .totalPost(0)
                 .build();
         minorGalleryRepository.save(gallery);
+    }
+
+    @Override
+    public String viewPostType(String minorId) {
+        return minorGalleryRepository.findByMinorId(minorId).getPostType();
     }
 }

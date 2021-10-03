@@ -5,10 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder @Getter
@@ -23,4 +22,14 @@ public class Account {
     private String password;
 
     private String role;
+
+    @OneToMany(mappedBy = "account")
+    private List<MinorGallery> minorGalleries = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account")
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "account")
+    private List<Comment> comments = new ArrayList<>();
+
 }
