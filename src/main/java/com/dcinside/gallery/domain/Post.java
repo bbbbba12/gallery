@@ -1,7 +1,9 @@
 package com.dcinside.gallery.domain;
 
 import com.dcinside.gallery.domain.base.BaseEntity;
+import com.dcinside.gallery.domain.dto.AccountDto;
 import com.dcinside.gallery.domain.dto.PostDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,12 +13,13 @@ import java.util.List;
 
 @Entity @Getter @Builder
 @NoArgsConstructor @AllArgsConstructor
-public class Post extends BaseEntity {
+public class Post {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MINORGALLERY_ID")
+    @JsonIgnore
     private MinorGallery minorGallery;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -37,7 +40,7 @@ public class Post extends BaseEntity {
     private boolean authenticated = false;
 
     public boolean matches(String password) {
-        if(authenticated == false && this.password == password) return true;
+        if(authenticated == false && password.equals(this.password)) return true;
         return false;
     }
 
@@ -51,6 +54,16 @@ public class Post extends BaseEntity {
         minorGallery.getPosts().add(this);
     }
 
+    private String createdBy;
 
+    public void anonymousUser(String author, String password) {
+        this.createdBy = author;
+        this.password = password;
+    }
 
+    public void authenticatedUser(Account account) {
+        this.account = account;
+        account.getPosts().add(this);
+        this.authenticated = true;
+    }
 }

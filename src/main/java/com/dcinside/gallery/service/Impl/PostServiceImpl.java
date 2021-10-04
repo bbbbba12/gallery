@@ -1,5 +1,6 @@
 package com.dcinside.gallery.service.Impl;
 
+import com.dcinside.gallery.domain.Account;
 import com.dcinside.gallery.domain.MinorGallery;
 import com.dcinside.gallery.domain.Post;
 import com.dcinside.gallery.domain.dto.PostDto;
@@ -23,17 +24,27 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public void write(String minorId, PostDto postDto) {
+    public void write(String minorId, PostDto postDto, Account account) {
         MinorGallery minorGallery = minorGalleryRepository.findByMinorId(minorId);
+        System.out.println("==================================================================");
         System.out.println(minorGallery.getMinorId());
+        System.out.println("==================================================================");
         Post post = Post.builder()
                 .name(postDto.getName())
                 .content(postDto.getContent())
-                // .author(postDto.getAuthor())
-                .password(postDto.getPassword())
                 .postType(postDto.getPostType())
                 .build();
-        
+
+        if(account != null){
+            post.authenticatedUser(account);
+        } else {
+            post.anonymousUser(postDto.getAuthor(), postDto.getPassword());
+        }
+
+        System.out.println("==================================================================");
+        System.out.println(post.getPassword());
+        System.out.println("==================================================================");
+
         post.addMinorGallery(minorGallery);
     }
 

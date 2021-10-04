@@ -28,6 +28,7 @@ public class MinorGalleryServiceImpl implements MinorGalleryService {
 
     @Override
     public String viewPostType(String minorId) {
-        return minorGalleryRepository.findByMinorId(minorId).getPostType();
+        //  return minorGalleryRepository.findByMinorId(minorId).getPostType();
+        return "일반";
     }
 }

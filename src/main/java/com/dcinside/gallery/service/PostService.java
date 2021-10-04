@@ -1,5 +1,6 @@
 package com.dcinside.gallery.service;
 
+import com.dcinside.gallery.domain.Account;
 import com.dcinside.gallery.domain.Post;
 import com.dcinside.gallery.domain.dto.PostDto;
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ public interface PostService {
      * 4. 수정 and 삭제
      * ++ 게시, 수정, 삭제는 임시 아이디, 비번이 필요하다.
      */
-    void write(String minorId, PostDto postDto);
+    void write(String minorId, PostDto postDto, Account account);
 
     Page<Post> findNormalPost(String minorId, Pageable pageable);
 
